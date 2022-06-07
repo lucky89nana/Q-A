@@ -1,0 +1,28 @@
+{
+  "name": "q-a",
+  "version": "1.0.0",
+  "description": "System Design Capstone at Hack Reactor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Atelier-Tyrell/Q-A.git"
+  },
+  "author": "Linna Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Atelier-Tyrell/Q-A/issues"
+  },
+  "homepage": "https://github.com/Atelier-Tyrell/Q-A#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0",
+    "prettier": "2.6.2",
+    "eslint": "^8.15.0"
+  }
+}
