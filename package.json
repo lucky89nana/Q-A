@@ -18,11 +18,13 @@
   "homepage": "https://github.com/Atelier-Tyrell/Q-A#readme",
   "dependencies": {
     "axios": "^0.27.2",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16",
+    "pg": "^8.7.3",
+    "postgres": "^3.2.4"
   },
   "devDependencies": {
     "jest": "^28.1.0",
-    "prettier": "2.6.2",
-    "eslint": "^8.15.0"
+    "prettier": "2.6.2"
   }
 }
