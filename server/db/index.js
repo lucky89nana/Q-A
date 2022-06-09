@@ -29,7 +29,7 @@ db.connect()
           question_date bigint,
           asker_name VARCHAR(50),
           asker_email VARCHAR(50),
-          reported INTEGER DEFAULT 0,
+          reported boolean DEFAULT FALSE,
           question_helpfulness INTEGER DEFAULT 0
         );
         CREATE TABLE if not exists answers (
@@ -39,7 +39,7 @@ db.connect()
           answer_date bigint,
           answerer_name VARCHAR(255),
           answerer_email VARCHAR(255),
-          reported INTEGER DEFAULT 0,
+          reported boolean DEFAULT FALSE,
           answer_helpfulness INTEGER
         );
         CREATE TABLE if not exists photos (
@@ -66,14 +66,8 @@ db.connect()
       console.log('Questions, answers, and photos tables are populated.');
 
       await db.query(`
-      ALTER TABLE answers ADD COLUMN temp_date TIMESTAMP WITHOUT TIME ZONE NULL;
-      UPDATE answers SET temp_date = to_timestamp(answer_date / 1000)::TIMESTAMP;
-      ALTER TABLE answers ALTER COLUMN answer_date TYPE TIMESTAMP WITHOUT TIME ZONE USING temp_date;
-      ALTER TABLE answers DROP COLUMN temp_date;
-      ALTER TABLE questions ADD COLUMN temp_date TIMESTAMP WITHOUT TIME ZONE NULL;
-      UPDATE questions SET temp_date = to_timestamp(question_date / 1000)::TIMESTAMP;
-      ALTER TABLE questions ALTER COLUMN question_date TYPE TIMESTAMP WITHOUT TIME ZONE USING temp_date;
-      ALTER TABLE questions DROP COLUMN temp_date;
+      ALTER TABLE answers ALTER COLUMN answer_date TYPE TIMESTAMP USING (to_timestamp(answer_date::decimal/1000));
+      ALTER TABLE questions ALTER COLUMN question_date TYPE TIMESTAMP USING (to_timestamp(question_date::decimal/1000));
       `);
       console.log(
         'Columns question_date and answer_date are converted to type timestamp.'
