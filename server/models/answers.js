@@ -4,8 +4,8 @@ module.exports = {
   getAnswers: async (question_id, count) => {
     try {
       const query = `
-      SELECT question_id, answer_body, answer_date, answerer_name, answerer_email, reported, answer_helpfulness
-      FROM answers WHERE question_id = ${question_id} AND reported = 0`;
+      SELECT a.id, a.question_id, a.answer_body, a.answer_date, a.answerer_name, a.answerer_email, a.reported, a.answer_helpfulness, json_agg((json_build_object('url', p.url))) AS photos
+      FROM answers a JOIN photos p on a.id = p.answer_id WHERE a.question_id = ${question_id} AND a.reported = 0 GROUP BY a.id`;
 
       const answer = await db.query(query);
 
