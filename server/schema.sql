@@ -1,4 +1,5 @@
--- \c qa
+\c qa
+
 DROP TABLE IF EXISTS questions;
 DROP TABLE IF EXISTS answers;
 DROP TABLE IF EXISTS photos;
