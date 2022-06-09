@@ -15,7 +15,7 @@ app.set('port', 5432);
 app.use(express.json());
 
 // Set up our routes
-app.use('', router);
+app.use('/qa', router);
 
 // Serve the client files
 // app.use(express.static('client/dist'));

@@ -4,17 +4,17 @@ const questions = require('./controllers/questions');
 const answers = require('./controllers/answers');
 
 //Connect controller methods to their corresponding routes
-router.get('/', questions.getQuestions);
+router.get('/questions', questions.getQuestions);
 
-router.post('/', questions.postQuestion);
+router.get('/questions/:question_id/answers', answers.getAnswers);
 
-router.put('/:question_id/helpful', questions.addHelpful);
+router.post('/questions', questions.postQuestion);
 
-router.put('/:question_id/report', questions.addReport);
+router.post('/questions/:question_id/answers', answers.postAnswer);
 
-router.get('/:question_id/answers', answers.getAnswers);
+router.put('/questions/:question_id/helpful', questions.addHelpful);
 
-router.post('/answers', answers.postAnswer);
+router.put('/questions/:question_id/report', questions.addReport);
 
 router.put('/answers/:answer_id/helpful', answers.addHelpful);
 
