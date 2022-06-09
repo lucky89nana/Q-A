@@ -1,17 +1,23 @@
-var controller = require('./controllers');
 var router = require('express').Router();
 
+const questions = require('./controllers/questions');
+const answers = require('./controllers/answers');
+
 //Connect controller methods to their corresponding routes
-router.get('/messages', controller.messages.get);
+router.get('/', questions.getQuestions);
 
-router.post('/messages', controller.messages.post);
+router.post('/', questions.postQuestion);
 
-router.get('/users', controller.users.get);
+router.put('/:question_id/helpful', questions.addHelpful);
 
-router.post('/users', controller.users.post);
+router.put('/:question_id/report', questions.addReport);
 
-router.get('/rooms', controller.rooms.get);
+router.get('/:question_id/answers', answers.getAnswers);
 
-router.post('/rooms', controller.rooms.post);
+router.post('/answers', answers.postAnswer);
+
+router.put('/answers/:answer_id/helpful', answers.addHelpful);
+
+router.put('/answers/:answer_id/report', answers.addReport);
 
 module.exports = router;
