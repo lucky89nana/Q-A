@@ -36,8 +36,8 @@ module.exports = {
       q.reported = 0;
       `;
 
-      const questions = await db.query(query);
-      return questions.rows[0];
+      const question = await db.query(query);
+      return question.rows[0];
     } catch (error) {
       console.log(error);
     }

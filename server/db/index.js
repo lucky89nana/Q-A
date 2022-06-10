@@ -29,7 +29,7 @@ db.connect()
           question_date bigint,
           asker_name VARCHAR(50),
           asker_email VARCHAR(50),
-          reported boolean DEFAULT FALSE,
+          reported INTEGER DEFAULT 0,
           question_helpfulness INTEGER DEFAULT 0
         );
         CREATE TABLE if not exists answers (
@@ -39,7 +39,7 @@ db.connect()
           answer_date bigint,
           answerer_name VARCHAR(255),
           answerer_email VARCHAR(255),
-          reported boolean DEFAULT FALSE,
+          reported INTEGER DEFAULT 0,
           answer_helpfulness INTEGER
         );
         CREATE TABLE if not exists photos (

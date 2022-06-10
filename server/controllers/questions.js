@@ -1,60 +1,55 @@
-const Questions = require('../models/questions');
+const models = require('../models');
 
 module.exports = {
-  getQuestions: async (req, res) => {
-    try {
-      const { product_id, page, count } = req.query;
-      const questions = await Questions.getQuestions(product_id, count);
-      res.send(questions);
-    } catch (error) {
-      res.status(400).json({ message: error });
-    }
+  getQuestions: (req, res) => {
+    const { product_id, page, count } = req.query;
+    models.questions
+      .getQuestions(product_id, count)
+      .then((results) => {
+        res.status(200).send(results);
+      })
+      .catch((error) => res.sendStatus(404));
   },
 
-  postQuestion: async (req, res) => {
-    try {
-      const { body, name, email, product_id } = req.body;
-      const question = await Questions.postQuestion(
-        product_id,
-        body,
-        name,
-        email
-      );
-      if (question.length) {
-        res.sendStatus(201);
-      } else {
-        res.sendStatus(400);
-      }
-    } catch (error) {
-      res.status(400).json({ message: error });
-    }
+  postQuestion: (req, res) => {
+    const { body, name, email, product_id } = req.body;
+    models.questions
+      .postQuestion(product_id, body, name, email)
+      .then((result) => {
+        if (result.length) {
+          res.sendStatus(201);
+        } else {
+          res.sendStatus(400);
+        }
+      })
+      .catch((error) => res.sendStatus(400));
   },
 
-  addHelpful: async (req, res) => {
-    try {
-      const { question_id } = req.params;
-      const helpful = await Questions.addHelpful(question_id);
-      if (helpful.length) {
-        res.sendStatus(204);
-      } else {
-        res.sendStatus(400);
-      }
-    } catch (error) {
-      res.status(400).json({ message: error });
-    }
+  addHelpful: (req, res) => {
+    const { question_id } = req.params;
+    models.questions
+      .addHelpful(question_id)
+      .then((result) => {
+        if (helpful.length) {
+          res.sendStatus(204);
+        } else {
+          res.sendStatus(400);
+        }
+      })
+      .catch((error) => res.sendStatus(400));
   },
 
-  addReport: async (req, res) => {
-    try {
-      const { question_id } = req.params;
-      const reported = await Questions.addReport(question_id);
-      if (reported.length) {
-        res.sendStatus(204);
-      } else {
-        res.sendStatus(400);
-      }
-    } catch (error) {
-      res.status(400).json({ message: error });
-    }
+  addReport: (req, res) => {
+    const { question_id } = req.params;
+    models.questions
+      .addReport(question_id)
+      .then((result) => {
+        if (reported.length) {
+          res.sendStatus(204);
+        } else {
+          res.sendStatus(400);
+        }
+      })
+      .catch((error) => res.sendStatus(400));
   },
 };

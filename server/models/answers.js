@@ -13,7 +13,6 @@ module.exports = {
       , '[]') AS photos FROM answers a LEFT JOIN photos p on a.id = p.answer_id WHERE a.question_id = ${question_id} AND a.reported = 0 GROUP BY a.id ORDER BY a.answer_helpfulness DESC;`;
 
       const answer = await db.query(query);
-
       return answer.rows;
     } catch (error) {
       res.status(400).json({ message: error });
@@ -43,7 +42,7 @@ module.exports = {
       }
       return answer.rows;
     } catch (error) {
-      res.status(400).json({ message: error });
+      res.sendStatus(404);
     }
   },
 
@@ -57,7 +56,7 @@ module.exports = {
 
       return helpful.rows;
     } catch (error) {
-      res.status(400).json({ message: error });
+      res.sendStatus(404);
     }
   },
 
@@ -71,7 +70,7 @@ module.exports = {
 
       return reported.rows;
     } catch (error) {
-      res.status(400).json({ message: error });
+      res.sendStatus(404);
     }
   },
 };
