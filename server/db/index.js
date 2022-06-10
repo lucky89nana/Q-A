@@ -12,6 +12,6 @@ const db = new Pool({
 
 db.connect()
   .then(() => console.log('Database is connected!'))
-  .catch((err) => console.error('err', err));
+  .catch((err) => console.log('err', err));
 
 module.exports = db;
