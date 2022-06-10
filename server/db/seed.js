@@ -52,13 +52,21 @@ const db = require('../db/');
     ]);
     console.log('Questions, answers, and photos tables are populated.');
 
-    await db.query(`
-    ALTER TABLE answers ALTER COLUMN answer_date TYPE TIMESTAMP USING (to_timestamp(answer_date::decimal/1000));
-    ALTER TABLE questions ALTER COLUMN question_date TYPE TIMESTAMP USING (to_timestamp(question_date::decimal/1000));
-    `);
+    await db.query(
+      `ALTER TABLE answers ALTER COLUMN answer_date TYPE TIMESTAMP USING (to_timestamp(answer_date::decimal/1000));
+      ALTER TABLE questions ALTER COLUMN question_date TYPE TIMESTAMP USING (to_timestamp(question_date::decimal/1000));`
+    );
     console.log(
       'Columns question_date and answer_date are converted to type timestamp.'
     );
+
+    await db.query(
+      `CREATE INDEX idx_product_id ON questions(product_id);
+      CREATE INDEX idx_question_id ON answers(question_id);
+      CREATE INDEX idx_answer_id ON photos(answer_id);
+      CREATE INDEX idx_answers_reported ON answers(reported);`
+    );
+    console.log('create index');
   } catch (error) {
     console.log(error);
   }

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon server/app.js",
     "seed": "node server/db/seed.js",
-    "test": "jest"
+    "test": "jest",
+    "stress": "k6 run server/script.js"
   },
   "repository": {
     "type": "git",
