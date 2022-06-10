@@ -15,7 +15,7 @@ module.exports = {
       const answer = await db.query(query);
       return answer.rows;
     } catch (error) {
-      res.status(400).json({ message: error });
+      res.sendStatus(404);
     }
   },
 

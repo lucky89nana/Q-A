@@ -53,7 +53,7 @@ module.exports = {
     try {
       const question = await db.query(`
         INSERT INTO questions (product_id, question_body, question_date, asker_name, asker_email)
-        VALUES (${product_id}, '${body}', '${date_written}', '${name}', '${email}' RETURNING *`);
+        VALUES (${product_id}, '${body}', '${date_written}', '${name}', '${email}') RETURNING *`);
       return question.rows;
     } catch (error) {
       console.log(error);
