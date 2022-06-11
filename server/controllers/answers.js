@@ -18,13 +18,13 @@ module.exports = {
   },
 
   postAnswer: (req, res) => {
-    const { question_id } = req.query;
+    const { question_id } = req.params;
     const { body, name, email, photos } = req.body;
     models.answers
       .postAnswer(question_id, body, name, email, photos)
       .then((result) => {
         if (result.length) {
-          res.status(201).send('Thank you for posting!');
+          res.status(201).send('CREATED!');
         } else {
           res.sendStatus(400);
         }
@@ -37,8 +37,8 @@ module.exports = {
     models.answers
       .addHelpful(answer_id)
       .then((result) => {
-        if (helpful.length) {
-          res.status(204).send('Thank you for adding helpfulnesse!');
+        if (result.length) {
+          res.sendStatus(204);
         } else {
           res.sendStatus(400);
         }
@@ -51,8 +51,8 @@ module.exports = {
     models.answers
       .addReport(answer_id)
       .then((result) => {
-        if (reported.length) {
-          res.status(204).send('Thank you for reporting!');
+        if (result.length) {
+          res.sendStatus(204);
         } else {
           res.sendStatus(400);
         }

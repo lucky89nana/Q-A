@@ -27,7 +27,7 @@ const db = require('../db/');
         answerer_name VARCHAR(255),
         answerer_email VARCHAR(255),
         reported INTEGER DEFAULT 0,
-        answer_helpfulness INTEGER
+        answer_helpfulness INTEGER DEFAULT 0
       );
       CREATE TABLE if not exists photos (
         id SERIAL PRIMARY KEY,
@@ -63,10 +63,9 @@ const db = require('../db/');
     await db.query(
       `CREATE INDEX idx_product_id ON questions(product_id);
       CREATE INDEX idx_question_id ON answers(question_id);
-      CREATE INDEX idx_answer_id ON photos(answer_id);
-      CREATE INDEX idx_answers_reported ON answers(reported);`
+      CREATE INDEX idx_answer_id ON photos(answer_id);`
     );
-    console.log('create index');
+    console.log('CREATE INDEX FOR QUESTIONS, ANSWERS AND PHOTOS TABLES');
 
     await db.query(
       `SELECT setval('questions_id_seq', 3518963, true);
