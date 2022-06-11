@@ -67,6 +67,13 @@ const db = require('../db/');
       CREATE INDEX idx_answers_reported ON answers(reported);`
     );
     console.log('create index');
+
+    await db.query(
+      `SELECT setval('questions_id_seq', 3518963, true);
+      SELECT setval('answers_id_seq', 6879306, true);
+      SELECT setval('photos_id_seq', 2063759, true);`
+    );
+    console.log('RESET INCREMENTING ID TO THE LAST ITEM IN THE TABLE');
   } catch (error) {
     console.log(error);
   }

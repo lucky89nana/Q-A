@@ -24,7 +24,7 @@ module.exports = {
       .postAnswer(question_id, body, name, email, photos)
       .then((result) => {
         if (result.length) {
-          res.sendStatus(201);
+          res.status(201).send('Thank you for posting!');
         } else {
           res.sendStatus(400);
         }
@@ -38,7 +38,7 @@ module.exports = {
       .addHelpful(answer_id)
       .then((result) => {
         if (helpful.length) {
-          res.sendStatus(204);
+          res.status(204).send('Thank you for adding helpfulnesse!');
         } else {
           res.sendStatus(400);
         }
@@ -52,7 +52,7 @@ module.exports = {
       .addReport(answer_id)
       .then((result) => {
         if (reported.length) {
-          res.sendStatus(204);
+          res.status(204).send('Thank you for reporting!');
         } else {
           res.sendStatus(400);
         }

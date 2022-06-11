@@ -7,14 +7,14 @@
     "start": "nodemon server/app.js",
     "seed": "node server/db/seed.js",
     "test": "jest",
-    "stress": "k6 run server/script.js"
+    "stress": "k6 run server/k6test.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Atelier-Tyrell/Q-A.git"
   },
   "author": "Linna Li",
-  "license": "ISC",
+  "license": "MIT",
   "jest": {
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
