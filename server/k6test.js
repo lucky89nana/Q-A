@@ -1,14 +1,13 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 export let options = {
-  vus: 1000, //stimulate how many virtual users
-  rps: 1000, // how many requests per second
-  duration: '60s', //how long you want it to run
+  vus: 1000, //stimulate how many virtual users // how many requests per second
+  duration: '30s', //how long you want it to run
 };
 
 //Below randomize the endpoints
 export default function () {
-  const randomNumber = Math.floor(Math.random() * 90000);
+  const randomNumber = Math.floor(Math.random() * (1000000 - 1 + 1)) + 1;
 
   /*----- get questions test -----*/
   const res1 = http.get(

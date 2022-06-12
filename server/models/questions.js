@@ -1,8 +1,9 @@
 const db = require('../db/');
 
 module.exports = {
-  getQuestions: async (product_id, count) => {
+  getQuestions: async (product_id, page = 1, count = 5) => {
     try {
+      const skipPage = count * (page - 1);
       const query = `
       SELECT ${product_id} AS product_id,
       coalesce(json_agg(json_build_object(
@@ -33,7 +34,7 @@ module.exports = {
       questions as q
       WHERE
       q.product_id = ${product_id} AND
-      q.reported = 0;
+      q.reported = 0 LIMIT ${count} OFFSET ${skipPage};
       `;
 
       const question = await db.query(query);

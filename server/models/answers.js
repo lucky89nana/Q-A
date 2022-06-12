@@ -3,15 +3,24 @@ const db = require('../db/');
 module.exports = {
   getAnswers: async (question_id, count = 5) => {
     try {
-      const query = `SELECT a.id as answer_id, a.answer_body as body, a.answer_date as date,a.answerer_name as answerer_name, a.answer_helpfulness as helpfulness, COALESCE (
-        json_agg (
-          json_build_object (
-            'id', p.id,
-            'url', p.url
-          ) ORDER BY p.id
-        )
-      , '[]') AS photos FROM answers a LEFT JOIN photos p on a.id = p.answer_id WHERE a.question_id = ${question_id} AND a.reported = 0 GROUP BY a.id ORDER BY a.answer_helpfulness DESC LIMIT ${count};`;
-
+      const query = `SELECT
+      a.id as answer_id,
+      a.answer_body as body, a.answer_date as date,a.answerer_name as answerer_name, a.answer_helpfulness as helpfulness,
+      (SELECT coalesce(json_agg(json_build_object(
+        'id', photos.id, 'url', photos.url
+        )), '[]'::json)
+          as photos from photos
+          where answer_id=a.id )
+    FROM
+      answers AS a
+    WHERE
+      a.reported = 0 AND
+      question_id = ${question_id}
+    GROUP BY
+      a.id, question_id, body, date
+    ORDER BY
+      a.id
+    LIMIT ${count};`;
       const answer = await db.query(query);
       return answer.rows;
     } catch (error) {

@@ -4,11 +4,14 @@ module.exports = {
   getQuestions: (req, res) => {
     const { product_id, page, count } = req.query;
     models.questions
-      .getQuestions(product_id, count)
+      .getQuestions(product_id, page, count)
       .then((results) => {
         res.status(200).send(results);
       })
-      .catch((error) => res.sendStatus(404));
+      .catch((error) => {
+        console.log(error);
+        res.sendStatus(404);
+      });
   },
 
   postQuestion: (req, res) => {
