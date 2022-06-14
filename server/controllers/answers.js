@@ -3,18 +3,14 @@ const models = require('../models');
 module.exports = {
   getAnswers: (req, res) => {
     const { question_id } = req.params;
-    const { count } = req.query;
-    const result = {
-      question: question_id,
-      results: [],
-    };
+    const { count, page } = req.query;
     models.answers
       .getAnswers(question_id, count)
-      .then((results) => {
-        result.results = results;
-        res.status(200).send(result);
-      })
-      .catch((error) => res.sendStatus(404));
+      .then((result) => res.status(200).send(result))
+      .catch((error) => {
+        console.log(error);
+        res.sendStatus(404);
+      });
   },
 
   postAnswer: (req, res) => {
