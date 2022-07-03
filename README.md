@@ -1,8 +1,33 @@
-# System Design Capstone
+# Atelier Questions & Answers API
 
-## Questions & Answers
+This is the backend service to support Atelier front-end commercial website for the Questions & Answers part built with RESTful API and PostgreSQL.
 
-### List Questions
+---
+## Installation
+
+```
+$ npm install
+```
+
+Start the postgrsql service in your terminal. You would crete the env file in the following format:
+
+```
+PGUSER=YOUR_USER
+PG_DATABASE=reviews
+PGHOST=YOUR_HOST
+PGPORT=5432
+PGPASSWORD=YOUR_PASSWORD
+```
+To start the server, run
+
+```
+$npm run-srver-dev
+```
+---
+
+# API Endpoints
+
+### Questions Lists
 
 GET /qa/questions
 
