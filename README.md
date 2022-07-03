@@ -14,7 +14,7 @@ Start the postgrsql service in your terminal. You would crete the env file in th
 
 ```
 PGUSER=YOUR_USER
-PG_DATABASE=reviews
+PG_DATABASE=Q&A
 PGHOST=YOUR_HOST
 PGPORT=5432
 PGPASSWORD=YOUR_PASSWORD
